@@ -9,6 +9,9 @@ module.exports = function (app) {
   
   
     githubId: { type: String },
+    name: { type: String },
+    avatar: { type: String },
+    email: { type: String }
   
   }, {
     timestamps: true
