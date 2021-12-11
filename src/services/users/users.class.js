@@ -31,5 +31,22 @@ exports.Users = class Users extends Service {
 
     // Call the original `create` method with existing `params` and new data
     return super.create(userData, params);
-  }  
+  }
+  async update (id, data, ctx) {
+    const {wandId} = data;
+    const updateData = { wandId };
+
+    // console.log('this',this)
+    const wandService = this.options.app.service('wands');
+    const wand  = await wandService.Model.findById(wandId).lean();
+    if (!wand) {
+      throw new Error('No such wand')
+    }
+    const currentLevel = ctx.user.level;
+    if (!(currentLevel > wand.requiredLevel)) {
+      throw new Error('Too low level to equip this wand');
+    }
+
+    return super.patch(id, updateData);
+  }
 };

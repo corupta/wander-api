@@ -8,11 +8,12 @@ module.exports = function (app) {
   const schema = new mongooseClient.Schema({
   
   
-    githubId: { type: String },
+    githubId: { type: String, unique: true },
     name: { type: String },
     avatar: { type: String },
-    email: { type: String }
-  
+    email: { type: String },
+    level: { type: Number, default: 1 },
+    wandId: { type: mongooseClient.Types.ObjectId,  ref: 'wands' }
   }, {
     timestamps: true
   });

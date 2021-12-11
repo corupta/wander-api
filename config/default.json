@@ -12,7 +12,7 @@
     "secret": "SECRET",
     "authStrategies": [
       "jwt",
-      "local"
+      "github"
     ],
     "jwtOptions": {
       "header": {

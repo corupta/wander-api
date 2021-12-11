@@ -5,6 +5,7 @@ const hooks = require('./users.hooks');
 
 module.exports = function (app) {
   const options = {
+    app,
     Model: createModel(app),
     paginate: app.get('paginate')
   };

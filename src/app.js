@@ -10,8 +10,10 @@ const logger = require('./logger');
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
+const swagger = require('feathers-swagger');
 
-
+// apply patches
+require('./patches');
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -40,6 +42,33 @@ app.use('/', express.static(app.get('public')));
 
 // Set up Plugins and providers
 app.configure(express.rest());
+app.configure(swagger({
+  docsPath: '/docs',
+  uiIndex: path.join(__dirname, 'docs.html'),
+  openApiVersion: 3,
+  specs: {
+    // servers: [
+    //   { url: 'https://api.wanderapp.cf/' },
+    //   { url: 'http://localhost:3030/' },
+    // ],
+    components: {
+      securitySchemes: {
+        Bearer: {
+          type: 'http',
+          scheme: 'bearer',
+          in: 'header',
+          bearerFormat: 'JWT'
+        }
+      }
+    },
+    info: {
+      title: 'Wander API',
+      description: 'Wander API Documentation',
+      version: '0.0.1',
+    },
+    schemes: ['http', 'https'], // Optionally set the protocol schema used (sometimes required when host on https)
+  },
+}));
 
 
 app.configure(mongoose);
