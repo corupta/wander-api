@@ -10,6 +10,13 @@ module.exports = function (app) {
     paginate: app.get('paginate')
   };
 
+  app.post('/users', (req, res)  => {
+    res.status(403).json({error:'Forbidden'});
+  })
+  app.patch('/users/:id', (req, res) => {
+    res.status(403).json({error:'Forbidden'});
+  })
+
   // Initialize our service with any options it requires
   app.use('/users', new Users(options, app));
 
