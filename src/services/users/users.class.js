@@ -16,6 +16,16 @@ const getGravatar = email => {
 };
 
 exports.Users = class Users extends Service {
+  async get(id, params) {
+    let realId = id;
+    if (id === 'profile') {
+      realId = params.user._id;
+      if (!realId) {
+        throw new Error('NotFound');
+      }
+    }
+    return super.get(realId, params);
+  }
   create (data, params) {
     // This is the information we want from the user signup data
     const { email, githubId, name } = data;
