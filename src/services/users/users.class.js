@@ -59,7 +59,7 @@ exports.Users = class Users extends Service {
       throw new Error('No such wand')
     }
     const currentLevel = ctx.user.level;
-    if (!(currentLevel > wand.requiredLevel)) {
+    if (!(currentLevel >= wand.requiredLevel)) {
       throw new Error('Too low level to equip this wand');
     }
 
