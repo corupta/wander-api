@@ -43,6 +43,13 @@ exports.Users = class Users extends Service {
     return super.create(userData, params);
   }  
   async update (id, data, ctx) {
+    let realId = id;
+    if (id === 'profile') {
+      realId = ctx.user._id;
+      if (!realId) {
+        throw new Error('NotFound');
+      }
+    }
     const {wandId} = data;
     const updateData = { wandId };
 
@@ -56,6 +63,6 @@ exports.Users = class Users extends Service {
       throw new Error('Too low level to equip this wand');
     }
 
-    return this.patch(id, updateData, ctx);
+    return this.patch(realId, updateData, ctx);
   }
 };
