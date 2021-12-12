@@ -39,7 +39,6 @@ phases:
   build:
     commands:
       - n 14
-      - yarn build
     # - command
     # - command
     #post_build:
