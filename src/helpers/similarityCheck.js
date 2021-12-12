@@ -99,3 +99,5 @@ if (!module.parent) {
     })
     /**/
 }
+
+exports.similarityCheck = similarityCheck;

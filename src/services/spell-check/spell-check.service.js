@@ -4,6 +4,7 @@ const hooks = require('./spell-check.hooks');
 
 module.exports = function (app) {
   const options = {
+    app,
     paginate: app.get('paginate')
   };
 
