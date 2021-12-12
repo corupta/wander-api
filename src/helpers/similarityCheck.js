@@ -64,7 +64,11 @@ const similarityCheck = async (points, spell) => {
     const distance = Jimp.distance(spellImg, drawnImg);
     const diff = Jimp.diff(spellImg, drawnImg).percent;
     // console.log('distance', distance, 'diff', diff);
-    return distance <= SIMILARITY_THRESHOLD || diff <= SIMILARITY_THRESHOLD;
+    const isSimilar = distance <= SIMILARITY_THRESHOLD || diff <= SIMILARITY_THRESHOLD;
+    return {
+        buffer,
+        isSimilar
+    };
 }
 
 if (!module.parent) {

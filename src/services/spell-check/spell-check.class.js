@@ -36,7 +36,7 @@ exports.SpellCheck = class SpellCheck {
     if (!(currentLevel >= spell.requiredLevel)) {
       throw new Error('Too low level to try out this spell');
     }
-    const isSimilar = await similarityCheck(points, spell);
+    const { isSimilar, buffer } = await similarityCheck(points, spell);
     let levelUp = false;
     if (isSimilar) {
       if (currentLevel === spell.requiredLevel) {
@@ -49,6 +49,7 @@ exports.SpellCheck = class SpellCheck {
       isSimilar,
       levelUp,
       user: ctx.user,
+      drawnImage: buffer.toString('base64')
     }
   }
 
