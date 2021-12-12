@@ -8,6 +8,12 @@
 * [@corupta/wander-test-dashboard](https://github.com/corupta/wander-test-dashboard)
 ## Swagger Docs
 [https://api.wanderapp.cf/docs](https://api.wanderapp.cf/docs)
+
+## Deploy
+Deployed to Vercel, a free service for deploying projects. Uses AWS Lambda internally, so each concurrent API call will run in parallel.
+
+A free cluster from MongoDB Atlas was opened and connected as DB.
+
 ## About
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
