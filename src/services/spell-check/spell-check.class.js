@@ -4,6 +4,11 @@ const { similarityCheck } = require('../../helpers/similarityCheck');
 exports.SpellCheck = class SpellCheck {
   constructor (options) {
     this.options = options || {};
+    this.docs = {
+      definitions: {
+          ['spell-check']:  {},
+      }
+    }
   }
 
   // async find (params) {
@@ -32,15 +37,18 @@ exports.SpellCheck = class SpellCheck {
       throw new Error('Too low level to try out this spell');
     }
     const isSimilar = await similarityCheck(points, spell);
+    let levelUp = false;
     if (isSimilar) {
       if (currentLevel === spell.requiredLevel) {
+        levelUp = true;
         ctx.user.level += 1;
         await ctx.user.save();
       }
     }
     return {
       isSimilar,
-      user: ctx.user
+      levelUp,
+      user: ctx.user,
     }
   }
 
